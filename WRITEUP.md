@@ -19,3 +19,6 @@ The estimated roll, pitch and yaw were obtained using the quaternion conversion.
 Additional yaw radian standardization was done afterwards.
 
 ![Figure 2](./figures/step2.png)
+
+### Step 3: Prediction Step
+

@@ -99,11 +99,11 @@ void QuadEstimatorEKF::UpdateFromIMU(V3F accel, V3F gyro)
     float predictedPitch = quaternion.ToEulerRPY()[1];
     float predictedYaw = quaternion.ToEulerRPY()[2];
     
-    if (predictedYaw > M_PI) {
-        predictedYaw = predictedYaw - 2.0 * M_PI;
+    if (predictedYaw > F_PI) {
+        predictedYaw = predictedYaw - 2.0 * F_PI;
     }
-    else if (predictedYaw < -M_PI) {
-        predictedYaw = predictedYaw + 2.0 * M_PI;
+    else if (predictedYaw < -F_PI) {
+        predictedYaw = predictedYaw + 2.0 * F_PI;
     }
     
     ekfState(6) = predictedYaw;
@@ -168,6 +168,8 @@ VectorXf QuadEstimatorEKF::PredictState(VectorXf curState, float dt, V3F accel, 
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 
+    V3F inertial = attitude.Rotate_BtoI(accel);
+    
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
