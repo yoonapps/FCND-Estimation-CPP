@@ -49,6 +49,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5A6B8E9720AA15BE00395BB1 /* LastScenario.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LastScenario.txt; path = ../config/LastScenario.txt; sourceTree = "<group>"; };
 		DB076C8A202A34C500386052 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		DB31989E20334078008ACD56 /* Simulation.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Simulation.txt; path = ../config/Simulation.txt; sourceTree = "<group>"; };
 		DB3198A320334078008ACD56 /* QuadPhysicalParams.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = QuadPhysicalParams.txt; path = ../config/QuadPhysicalParams.txt; sourceTree = "<group>"; };
@@ -176,6 +177,7 @@
 				DB56307120743A1A0070F86B /* SimulatedSensors.txt */,
 				DB31989E20334078008ACD56 /* Simulation.txt */,
 				DBD204F5203636AA00E0F55A /* Scenarios.txt */,
+				5A6B8E9720AA15BE00395BB1 /* LastScenario.txt */,
 			);
 			name = config;
 			sourceTree = "<group>";
