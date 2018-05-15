@@ -35,3 +35,9 @@ This function is the combination of two vectors `g1` and `g2`, as show in the "E
 These two are added together to make the `predictedState`.
 
 ![Figure 3](./figures/step3.2.png)
+
+`GetRbgPrime` is simply setting the correct values of `sin` and `cos` with `roll`, `pitch` and `yaw` basecd on formula (52) in "Estimation for Quadrotors".
+
+For the full `Predict`, the Jacovbian is calculated first. As formula (51) shows, the `dt` is set at (0, 3), (1, 4), (2, 5). Additionally, the `accel` `V3F` is converted to a `VectorXf` and multiplied with the `GetRbgPrime` written prior as well as `dt`. The value for this result vector is set at (3, 6), (4, 6), and (5, 6).
+
+Finally, the complete covariance is calculated by matrix multiplication of the `gPrime`, previous `ekfCov`, and `gPrimeTransposed` plus `Q`.

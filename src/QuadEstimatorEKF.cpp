@@ -221,7 +221,16 @@ MatrixXf QuadEstimatorEKF::GetRbgPrime(float roll, float pitch, float yaw)
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
 
-
+    RbgPrime(0, 0) = -cos(roll) * sin(yaw);
+    RbgPrime(0, 1) = -sin(pitch) * sin(roll) * sin(yaw) - cos(roll) * cos(yaw);
+    RbgPrime(0, 2) = -cos(pitch) * sin(roll) * sin(yaw) + sin(pitch) * cos(yaw);
+    
+    RbgPrime(1, 0) = cos(roll) * cos(yaw);
+    RbgPrime(1, 1) = sin(pitch) * sin(roll) * cos(yaw) - cos(pitch) * sin(yaw);
+    RbgPrime(1, 2) = cos(pitch) * sin(roll) * cos(yaw) + sin(pitch) * sin(yaw);
+    
+    RbgPrime.row(2) << 0, 0, 0;
+    
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   return RbgPrime;
@@ -266,8 +275,21 @@ void QuadEstimatorEKF::Predict(float dt, V3F accel, V3F gyro)
   gPrime.setIdentity();
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
+    
+    gPrime(0, 3) = dt;
+    gPrime(1, 4) = dt;
+    gPrime(2, 5) = dt;
 
+    VectorXf accelVector(3);
+    accelVector << accel[0], accel[1], accel[2];
+    VectorXf tempVector = RbgPrime * accelVector * dt;
+    gPrime(3, 6) = tempVector[0];
+    gPrime(4, 6) = tempVector[1];
+    gPrime(5, 6) = tempVector[2];
 
+    MatrixXf gPrimeTransposed = gPrime.transpose();
+    ekfCov = gPrime * ekfCov * gPrimeTransposed + Q;
+    
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   ekfState = newState;
