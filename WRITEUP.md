@@ -43,3 +43,9 @@ For the full `Predict`, the Jacovbian is calculated first. As formula (51) shows
 Finally, the complete covariance is calculated by matrix multiplication of the `gPrime`, previous `ekfCov`, and `gPrimeTransposed` plus `Q`.
 
 ![Figure 4](./figures/step3.4.png)
+
+### Step 4: Magnetometer Update
+
+The `UpdateFromMag` was simply written by setting `hPrime(0, 6) = 1.0;` and setting `zFromX` to the estimated yaw of `ekfState(6)` (with normalization based on the diff between measured and estimated).
+
+Additionally, the `QYawStd` was raised to `.35`.
