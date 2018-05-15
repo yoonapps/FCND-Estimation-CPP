@@ -4,9 +4,13 @@
 #include "Utility/StringUtils.h"
 #include "Math/Quaternion.h"
 
+#include <iostream>
+using namespace std;
+
 using namespace SLR;
 
 const int QuadEstimatorEKF::QUAD_EKF_NUM_STATES;
+const float GRAVITY = 9.81;
 
 QuadEstimatorEKF::QuadEstimatorEKF(string config, string name)
   : BaseQuadEstimator(config),
@@ -167,9 +171,29 @@ VectorXf QuadEstimatorEKF::PredictState(VectorXf curState, float dt, V3F accel, 
   Quaternion<float> attitude = Quaternion<float>::FromEuler123_RPY(rollEst, pitchEst, curState(6));
 
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-
-    V3F inertial = attitude.Rotate_BtoI(accel);
     
+    VectorXf g1(predictedState);
+    g1 <<
+    predictedState[0] + predictedState[3] * dt,
+    predictedState[1] + predictedState[4] * dt,
+    predictedState[2] + predictedState[5] * dt,
+    predictedState[3],
+    predictedState[4],
+    predictedState[5] - GRAVITY * dt,
+    predictedState[6];
+    
+    V3F inertial = attitude.Rotate_BtoI(accel);
+    VectorXf g2(predictedState);
+    g2 <<
+    0,
+    0,
+    0,
+    inertial[0] * dt,
+    inertial[1] * dt,
+    inertial[2] * dt,
+    0;
+    
+    predictedState = g1 + g2;
 
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
