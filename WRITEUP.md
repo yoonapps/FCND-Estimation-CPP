@@ -41,3 +41,5 @@ These two are added together to make the `predictedState`.
 For the full `Predict`, the Jacovbian is calculated first. As formula (51) shows, the `dt` is set at (0, 3), (1, 4), (2, 5). Additionally, the `accel` `V3F` is converted to a `VectorXf` and multiplied with the `GetRbgPrime` written prior as well as `dt`. The value for this result vector is set at (3, 6), (4, 6), and (5, 6).
 
 Finally, the complete covariance is calculated by matrix multiplication of the `gPrime`, previous `ekfCov`, and `gPrimeTransposed` plus `Q`.
+
+![Figure 4](./figures/step3.4.png)
