@@ -49,3 +49,15 @@ Finally, the complete covariance is calculated by matrix multiplication of the `
 The `UpdateFromMag` was simply written by setting `hPrime(0, 6) = 1.0;` and setting `zFromX` to the estimated yaw of `ekfState(6)` (with normalization based on the diff between measured and estimated).
 
 Additionally, the `QYawStd` was raised to `.35`.
+
+![Figure 5](./figures/step4.png)
+
+### Step 5: Closed Loop + GPS Update
+
+After turning off the ideal estimators and IMUs the drone flew terribly. However, after implementing `UpdateFromGPS`, the performance was much better.
+
+The implementation is to set an identity matrix from row 1 to 6 for `hPrime`. Then matrix multiplication with `ekfState` to get `zFromX`.
+
+![Figure 6](./figures/step5.png)
+
+
