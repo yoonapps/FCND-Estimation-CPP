@@ -314,7 +314,16 @@ void QuadEstimatorEKF::UpdateFromGPS(V3F pos, V3F vel)
   //  - The GPS measurement covariance is available in member variable R_GPS
   //  - this is a very simple update
   ////////////////////////////// BEGIN STUDENT CODE ///////////////////////////
-
+    
+    hPrime(0, 0) = 1.0;
+    hPrime(1, 1) = 1.0;
+    hPrime(2, 2) = 1.0;
+    hPrime(3, 3) = 1.0;
+    hPrime(4, 4) = 1.0;
+    hPrime(5, 5) = 1.0;
+    
+    zFromX = hPrime * ekfState;
+    
   /////////////////////////////// END STUDENT CODE ////////////////////////////
 
   Update(z, hPrime, R_GPS, zFromX);
