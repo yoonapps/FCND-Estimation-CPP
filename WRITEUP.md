@@ -60,4 +60,8 @@ The implementation is to set an identity matrix from row 1 to 6 for `hPrime`. Th
 
 ![Figure 6](./figures/step5.png)
 
+### Step 6: Adding Your Controller
 
+Fortunately, my `QuadController.cpp` implementation from the previous project worked as is!
+
+![Figure 6](./figures/step6.png)
